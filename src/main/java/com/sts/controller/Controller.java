@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sts.entity.Student;
+import com.sts.payload.StudentDto;
 import com.sts.service.StudentService;
 
 @RestController
@@ -21,23 +22,23 @@ public class Controller {
 	private StudentService studentService;
 	
 	@PostMapping("/add")
-	public Student addStudent(@RequestBody Student st) {
-		Student student = this.studentService.addStudent(st);
+	public StudentDto addStudent(@RequestBody Student st) {
+		StudentDto student = this.studentService.addStudent(st);
 		return student;
 	}
 	@GetMapping("/all")
-	public List<Student> getAllStudent(){
-		List<Student> list = this.studentService.getAllStudent();
+	public List<StudentDto> getAllStudent(){
+		List<StudentDto> list = this.studentService.getAllStudent();
 		return list;
 	}
 	@GetMapping("/{id}")
-	public Student getStudentById(@PathVariable int id) {
-		Student student = this.studentService.getStudentById(id);
+	public StudentDto getStudentById(@PathVariable int id) {
+		StudentDto student = this.studentService.getStudentById(id);
 		return student;
 	}
 	@PostMapping("/{id}")
-	public Student updateStudent(@RequestBody Student st , @PathVariable int id) {
-		Student student = this.studentService.updateStudent(st, id);
+	public StudentDto updateStudent(@RequestBody Student st , @PathVariable int id) {
+		StudentDto student = this.studentService.updateStudent(st, id);
 		return student;
 	}
 	@DeleteMapping("/{id}")

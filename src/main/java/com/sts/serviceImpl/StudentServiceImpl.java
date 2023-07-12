@@ -1,46 +1,57 @@
 package com.sts.serviceImpl;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sts.entity.Student;
+import com.sts.payload.StudentDto;
 import com.sts.repositories.StudentRepository;
 import com.sts.service.StudentService;
 
 @Service
 public class StudentServiceImpl implements StudentService{
-	
+	@Autowired
+	private ModelMapper mapper;
 	@Autowired
 	private StudentRepository studentRepo;
 
 	@Override
-	public Student addStudent(Student st) {
+	public StudentDto addStudent(Student st) {
 		Student student = this.studentRepo.save(st);
-		return student;
+		return this.mapper.map(student, StudentDto.class);
 	}
 
 	@Override
-	public List<Student> getAllStudent() {
+	public List<StudentDto> getAllStudent() {
 		List<Student> list = this.studentRepo.findAll();
-		return list;
+		List<StudentDto> collect = list.stream().map(p -> this.mapper.map(p, StudentDto.class)).collect(Collectors.toList());
+		
+		return collect;
 	}
 
 	@Override
-	public Student getStudentById(int id) {
+	public StudentDto getStudentById(int id) {
 		Student student = this.studentRepo.findById(id).get();
-		return student;
+		return this.mapper.map(student, StudentDto.class);
 	}
 
 	@Override
-	public Student updateStudent(Student st, int id) {
+	public StudentDto updateStudent(Student st, int id) {
+		
 		Student student = this.studentRepo.findById(id).get();
+		
 		student.setAbout(st.getAbout());
 		student.setAddress(st.getAddress());
 		student.setName(st.getName());
+		
 		Student save = this.studentRepo.save(student);
-		return save;
+		
+		return this.mapper.map(save, StudentDto.class);
 	}
 
 	@Override
