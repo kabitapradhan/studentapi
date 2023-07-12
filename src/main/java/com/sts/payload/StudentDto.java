@@ -9,7 +9,7 @@ public class StudentDto {
 	private String password;
 	private String address;
 	private String about;
-	
+//	/Student Api/src/main/resources/application.properties
 	public StudentDto() {
 		super();
 		// TODO Auto-generated constructor stub
