@@ -37,14 +37,18 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public StudentDto getStudentById(int id) {
-		Student student = this.studentRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Student", "id", id));
+		Student student = this.studentRepo
+				.findById(id)
+				.orElseThrow(()-> new ResourceNotFoundException("Student", "id", id));
 		return this.mapper.map(student, StudentDto.class);
 	}
 
 	@Override
 	public StudentDto updateStudent(StudentDto st, int id) {
 		
-		Student student = this.studentRepo.findById(id).get();
+		Student student = this.studentRepo
+				.findById(id)
+				.orElseThrow(()-> new ResourceNotFoundException("Student", "id", id));
 		
 		student.setAbout(st.getAbout());
 		student.setAddress(st.getAddress());
@@ -57,7 +61,10 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public void deletestudent(int id) {
-		Student student = this.studentRepo.findById(id).get();
+		Student student = this.studentRepo
+				.findById(id)
+				.orElseThrow(()-> new ResourceNotFoundException("Student", "id", id));
+				
 		this.studentRepo.delete(student);
 	}
 
