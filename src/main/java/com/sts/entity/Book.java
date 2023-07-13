@@ -1,10 +1,5 @@
 package com.sts.entity;
 
-import java.util.List;
-import java.util.Set;
-
-
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,21 +10,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="students")
+@Table(name="books")
 @NoArgsConstructor
 @Setter
 @Getter
-public class Student {
+public class Book {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	private String name;
-	private String email;
-	private String password;
-	private String address;
-	private String about;
+	private int book_id;
+	private String book_name;
+	private String book_authorname;
 	
-	//private List<Book>
-
 }

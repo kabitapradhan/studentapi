@@ -23,6 +23,7 @@ public class StudentDto {
 	
 	@Email(message = "Enter proper email")
 	@NotNull(message="User email can not be null")
+	@NotEmpty(message="User email can not be empty")
 	private String email;
 	
 	@NotNull(message="User password can not be null")
