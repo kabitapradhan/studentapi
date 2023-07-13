@@ -1,4 +1,4 @@
-package com.sts.payload;
+package com.sts.exception;
 
 public class ResourceNotFoundException extends RuntimeException{
 	

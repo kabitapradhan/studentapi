@@ -1,63 +1,40 @@
 package com.sts.payload;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class StudentDto {
 	
+	
 	private int id;
+	
+	@NotNull(message="User name can not be null")
+	@NotEmpty(message="User name can not be empty")
+	@Size(min=2 , message = "User name must be min 2 length")
 	private String name;
+	
+	@Email(message = "Enter proper email")
+	@NotNull(message="User email can not be null")
 	private String email;
+	
+	@NotNull(message="User password can not be null")
+	@NotEmpty(message="User password can not be empty")
+	@Size(min = 6 , max = 8, message = "Password length min 6 and max 8")
 	private String password;
+	
+	
 	private String address;
 	private String about;
-//	/Student Api/src/main/resources/application.properties
-	public StudentDto() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public StudentDto(int id, String name, String email, String password, String address, String about) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.address = address;
-		this.about = about;
-	}
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getAbout() {
-		return about;
-	}
-	public void setAbout(String about) {
-		this.about = about;
-	}
+
+
+
+
 }

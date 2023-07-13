@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sts.entity.Student;
+import com.sts.exception.ResourceNotFoundException;
 import com.sts.payload.StudentDto;
 import com.sts.repositories.StudentRepository;
 import com.sts.service.StudentService;
@@ -21,8 +22,8 @@ public class StudentServiceImpl implements StudentService{
 	private StudentRepository studentRepo;
 
 	@Override
-	public StudentDto addStudent(Student st) {
-		Student student = this.studentRepo.save(st);
+	public StudentDto addStudent(StudentDto st) {
+		Student student = this.studentRepo.save(this.mapper.map(st, Student.class));
 		return this.mapper.map(student, StudentDto.class);
 	}
 
@@ -36,12 +37,12 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public StudentDto getStudentById(int id) {
-		Student student = this.studentRepo.findById(id).get();
+		Student student = this.studentRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Student", "id", id));
 		return this.mapper.map(student, StudentDto.class);
 	}
 
 	@Override
-	public StudentDto updateStudent(Student st, int id) {
+	public StudentDto updateStudent(StudentDto st, int id) {
 		
 		Student student = this.studentRepo.findById(id).get();
 		
